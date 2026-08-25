@@ -1,1 +1,1 @@
-# session-query-recovery-attack
+# Artifact for session-based query recovery
