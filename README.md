@@ -1,8 +1,8 @@
-# Session-Based Query Recovery from Non-Exact Query Logs
-
-This artifact is built on the [LEAKER](https://github.com/encryptedsystems/Leaker) framework.
-
 > *"Queries Stay Together: Session-Based Query Recovery from Non-Exact Query Logs"*
+> 
+This artifact is built on the [LEAKER](https://github.com/encryptogroup/LEAKER) framework.
+
+
 
 ---
 
