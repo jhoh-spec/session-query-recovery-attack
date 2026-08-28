@@ -45,10 +45,10 @@ The raw datasets are **not redistributed with this artifact**. Please download t
 
 Experiments in this paper use **TAIR Query Logs** and **Wikidata SPARQL Logs**.
 
-| Dataset              | Where to Download                                                                                                                 | Place at                                                             |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| TAIR Query Log       | [IPK Gatersleben](https://doi.ipk-gatersleben.de/DOI/a8d78c11-bb09-43a9-8eb4-591fa1266133/9462b38e-bb71-44ba-b95d-42bebf1cbf81/2) | `data_sources/TAIR/query_log/`                                       |
-| Wikidata SPARQL Logs | [TU Dresden](https://iccl.inf.tu-dresden.de/web/Wikidata_SPARQL_Logs/en)                                                          | `data_sources/Wikidata SPARQL Logs/I1_status2xx_userData_Joined.tsv` |
+| Dataset | Where to Download | Place at |
+|---|---|---|
+| TAIR Query Log | [IPK Gatersleben](https://doi.ipk-gatersleben.de/DOI/a8d78c11-bb09-43a9-8eb4-591fa1266133/9462b38e-bb71-44ba-b95d-42bebf1cbf81/2) | `data_sources/TAIR/query_log/` |
+| Wikidata SPARQL Logs | [TU Dresden](https://iccl.inf.tu-dresden.de/web/Wikidata_SPARQL_Logs/en) | `data_sources/Wikidata SPARQL Logs/I1_status2xx_userData_Joined.tsv` |
 
 After downloading the datasets, the relevant directory structure should be:
 
@@ -71,19 +71,19 @@ After installing the dependencies and downloading the required datasets, experim
 cd evaluation/keyword
 ```
 
-For experiments using the **TAIR Query Log**, the dataset must first be indexed as described below.
+For experiments using the **TAIR Query Log**, the dataset must first be preprocessed as described below.
 
-For experiments using the **Wikidata SPARQL Logs**, no separate indexing step is required.
+For experiments using the **Wikidata SPARQL Logs**, no separate preprocessing step is required.
 
 The evaluation scripts directly compare our two session-based variants (**THRESHOLD** and **DENSITY**) with the **MAPLE** and **IHOP** baselines.
 
 ---
 
-## Indexing
+## Data Preprocessing
 
-Before running the TAIR evaluations, index the raw query log into Whoosh format.
+Before running the TAIR evaluations, preprocess the raw TAIR query log.
 
-All indexing commands should be executed from:
+All preprocessing commands should be executed from:
 
 ```bash
 cd evaluation/keyword
@@ -103,11 +103,17 @@ The script reads:
 data_sources/TAIR/query_log/TAIR_query_log.txt
 ```
 
-and builds the `tair_ql` Whoosh index used by the TAIR experiments.
+and prepares the TAIR data required by the evaluation scripts.
+
+The processed data and index files are stored under:
+
+```text
+evaluation/keyword/data/
+```
 
 ### Wikidata SPARQL — required for large-scale and parameter experiments
 
-No indexing step is required.
+No preprocessing step is required.
 
 The corresponding evaluation scripts read the TSV file directly from:
 
@@ -134,16 +140,16 @@ python <script_name>.py
 
 ### Evaluation Scripts
 
-| Script                                | Paper             | Dataset  | Description                                                                    |
-| ------------------------------------- | ----------------- | -------- | ------------------------------------------------------------------------------ |
-| `eval_compare_other_user.py`          | §5.3.1 · Fig. 3   | TAIR     | Other-user auxiliary setting: 10 users, 90 ordered user pairs, |W| ∈ {50, 100} |
-| `eval_compare_split_user.py`          | §5.3.2 · Fig. 4   | TAIR     | Outdated auxiliary setting: chronological split for each user, |W| ∈ {50, 100} |
-| `eval_large_keyword.py`               | §5.3.3 · Fig. 5/6 | Wikidata | Large keyword universe, 5 seeds, |W| ∈ {500, 1000, 2000}                       |
-| `eval_session-co_relation.py`         | §5.2 · Table 3    | TAIR     | Session co-occurrence vs. transition feature overlap at K ∈ {1, 2, 3, 5}       |
-| `eval_parameter_session_threshold.py` | Appendix B.1      | Wikidata | Sensitivity to THRESHOLD δ ∈ {10, 20, 30, 60} min                              |
-| `eval_parameter_min_samples.py`       | Appendix B.2      | Wikidata | Sensitivity to DENSITY `min_samples` ∈ {2, 3, 5, 10}                           |
-| `eval_parameter_beta.py`              | Appendix B.3      | Wikidata | Sensitivity to β ∈ {0.2, 0.4, 0.6, 0.8, 1.0}                                   |
-| `eval_parameter_refspeed.py`          | Appendix B.4      | Wikidata | Sensitivity to RefSpeed ∈ {5, 10, 20, 50, 100}                                 |
+| Script | Paper | Dataset | Description |
+|---|---|---|---|
+| `eval_compare_other_user.py` | §5.3.1 · Fig. 3 | TAIR | Other-user auxiliary setting: 10 users, 90 ordered user pairs, \|W\| ∈ {50, 100} |
+| `eval_compare_split_user.py` | §5.3.2 · Fig. 4 | TAIR | Outdated auxiliary setting: chronological split for each user, \|W\| ∈ {50, 100} |
+| `eval_large_keyword.py` | §5.3.3 · Fig. 5/6 | Wikidata | Large keyword universe, 5 seeds, \|W\| ∈ {500, 1000, 2000} |
+| `eval_session-co_relation.py` | §5.2 · Table 3 | TAIR | Session co-occurrence vs. transition feature overlap at K ∈ {1, 2, 3, 5} |
+| `eval_parameter_session_threshold.py` | Appendix B.1 | Wikidata | Sensitivity to THRESHOLD δ ∈ {10, 20, 30, 60} min |
+| `eval_parameter_min_samples.py` | Appendix B.2 | Wikidata | Sensitivity to DENSITY `min_samples` ∈ {2, 3, 5, 10} |
+| `eval_parameter_beta.py` | Appendix B.3 | Wikidata | Sensitivity to β ∈ {0.2, 0.4, 0.6, 0.8, 1.0} |
+| `eval_parameter_refspeed.py` | Appendix B.4 | Wikidata | Sensitivity to RefSpeed ∈ {5, 10, 20, 50, 100} |
 
 ---
 
@@ -167,10 +173,10 @@ The evaluation considers 10 users, corresponding to 90 ordered victim–auxiliar
 
 Methods compared:
 
-* THRESHOLD
-* DENSITY
-* MAPLE
-* IHOP
+- THRESHOLD
+- DENSITY
+- MAPLE
+- IHOP
 
 ---
 
@@ -192,10 +198,10 @@ The experiment evaluates:
 
 Methods compared:
 
-* THRESHOLD
-* DENSITY
-* MAPLE
-* IHOP
+- THRESHOLD
+- DENSITY
+- MAPLE
+- IHOP
 
 ---
 
@@ -293,12 +299,12 @@ RefSpeed ∈ {5, 10, 20, 50, 100}
 
 The evaluation compares the following query-recovery attacks.
 
-| Method        | Segmenter / Model         | Description                                                                                                   |
-| ------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **THRESHOLD** | `TimeGapSegmenter(δ)`     | Our session-based attack using time-gap session segmentation                                                  |
-| **DENSITY**   | `DBSCANSegmenter(eps, m)` | Our session-based attack using density-based session segmentation                                             |
-| **MAPLE**     | `MarkovDecoding`          | Frequency + Markov HMM baseline ([MAPLE, PoPETs 2024](https://doi.org/10.56553/popets-2024-0025))             |
-| **IHOP**      | `MarkovIHOP`              | Hungarian-algorithm Markov baseline ([IHOP, USENIX Security 2022](https://doi.org/10.48550/arXiv.2110.04180)) |
+| Method | Segmenter / Model | Description |
+|---|---|---|
+| **THRESHOLD** | `TimeGapSegmenter(δ)` | Our session-based attack using time-gap session segmentation |
+| **DENSITY** | `DBSCANSegmenter(eps, m)` | Our session-based attack using density-based session segmentation |
+| **MAPLE** | `MarkovDecoding` | Frequency + Markov HMM baseline ([MAPLE, PoPETs 2024](https://doi.org/10.56553/popets-2024-0025)) |
+| **IHOP** | `MarkovIHOP` | Hungarian-algorithm Markov baseline ([IHOP, USENIX Security 2022](https://doi.org/10.48550/arXiv.2110.04180)) |
 
 ---
 
@@ -312,31 +318,26 @@ leaker/attack/session_recovery.py
 
 ### Key Classes
 
-| Class                  | Role                                                                                                                     |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Class | Role |
+|---|---|
 | `SessionBasedRecovery` | Main attack: builds session co-occurrence information from auxiliary logs and progressively recovers victim query tokens |
-| `TimeGapSegmenter`     | Segments a query sequence into sessions according to a time-gap threshold δ                                              |
-| `DBSCANSegmenter`      | Segments a query sequence into sessions using DBSCAN                                                                     |
+| `TimeGapSegmenter` | Segments a query sequence into sessions according to a time-gap threshold δ |
+| `DBSCANSegmenter` | Segments a query sequence into sessions using DBSCAN |
 
 ### `SessionBasedRecovery` Parameters
 
-| Parameter      | Default              | Description                                                              |
-| -------------- | -------------------- | ------------------------------------------------------------------------ |
-| `segmenter`    | `TimeGapSegmenter()` | Session segmentation strategy                                            |
-| `top_k`        | `5`                  | Number of candidate keywords per token in Phase 3                        |
-| `beta`         | `0.5`                | Weight balancing frequency (`0`) and session co-occurrence (`1`) signals |
-| `batch_size`   | `10`                 | Number of tokens recovered per refinement pass (RefSpeed)                |
-| `dedup`        | `True`               | Whether to deduplicate keyword occurrences within a session              |
-| `cooc_version` | `2`                  | Co-occurrence weighting scheme (`2` = weighted, `1` = simple)            |
+| Parameter | Default | Description |
+|---|---|---|
+| `segmenter` | `TimeGapSegmenter()` | Session segmentation strategy |
+| `top_k` | `5` | Number of candidate keywords per token in Phase 3 |
+| `beta` | `0.5` | Weight balancing frequency (`0`) and session co-occurrence (`1`) signals |
+| `batch_size` | `10` | Number of tokens recovered per refinement pass (RefSpeed) |
+| `dedup` | `True` | Whether to deduplicate keyword occurrences within a session |
+| `cooc_version` | `2` | Co-occurrence weighting scheme (`2` = weighted, `1` = simple) |
 
 The table above lists the implementation defaults.
 
-Unless otherwise specified, the experiments reported in the paper override these defaults with:
 
-```text
-dedup = False
-batch_size = 5
-```
 
 Experiment-specific parameters are defined in the corresponding evaluation scripts.
 
@@ -347,7 +348,6 @@ Experiment-specific parameters are defined in the corresponding evaluation scrip
 The evaluation scripts report the query recovery performance of the evaluated attacks under the corresponding experimental settings.
 
 Because the experiments involve keyword sampling and other randomized components, individual runs may differ slightly from the exact values reported in the paper. However, the overall trends should remain consistent with the paper.
-
 
 ---
 
@@ -360,7 +360,7 @@ artifact/
 ├── leaker/
 │   ├── attack/
 │   │   ├── session_recovery.py
-│   │   │   └── session-based query recovery attack (this paper)
+│   │   │   └── session-based query recovery attack 
 │   │   └── markov/
 │   │       └── MarkovDecoding and MarkovIHOP baselines
 │   └── whoosh_interface.py
@@ -368,35 +368,25 @@ artifact/
 ├── evaluation/
 │   └── keyword/
 │       ├── eval_compare_other_user.py
-│       │   └── Fig. 3
 │       ├── eval_compare_split_user.py
-│       │   └── Fig. 4
 │       ├── eval_large_keyword.py
-│       │   └── Fig. 5/6
 │       ├── eval_session-co_relation.py
-│       │   └── Table 3
 │       ├── eval_parameter_session_threshold.py
-│       │   └── Appendix B.1
 │       ├── eval_parameter_min_samples.py
-│       │   └── Appendix B.2
 │       ├── eval_parameter_beta.py
-│       │   └── Appendix B.3
 │       ├── eval_parameter_refspeed.py
-│       │   └── Appendix B.4
-│       └── index_tair_with_times.py
+│       ├── index_tair_with_times.py
+│       └── data/
+│           ├── whoosh/
+│           ├── pickle/
+│           └── cache/
 │
-├── data_sources/
-│   ├── TAIR/
-│   └── Wikidata SPARQL Logs/
-│
-└── data/
-    ├── whoosh/
-    ├── pickle/
-    │   └── cached query logs
-    └── cache/
+└── data_sources/
+    ├── TAIR/
+    └── Wikidata SPARQL Logs/
 ```
 
-The directories under `data/` are generated or populated automatically during execution.
+The directories under `evaluation/keyword/data/` are generated or populated automatically during preprocessing and evaluation.
 
 ---
 
@@ -406,3 +396,4 @@ This artifact is built on the [LEAKER](https://github.com/encryptogroup/LEAKER) 
 
 The `MarkovDecoding` and `MarkovIHOP` baselines build on the IHOP implementation by [Simon Oya](https://github.com/simon-oya/USENIX22-ihop-code).
 
+We thank the authors of these projects for making their implementations publicly available.
