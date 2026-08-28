@@ -176,6 +176,4 @@ artifact/
 
 ## Acknowledgements
 
-This artifact extends the [LEAKER framework](https://github.com/encryptedsystems/Leaker) by Patrick Ehrler, Abdelkarim Kati, Johannes Leupold, Tobias Stöckert, Amos Treiber, and Michael Yonli.
-
 The `MarkovDecoding` and `MarkovIHOP` baselines build on the IHOP implementation by [Simon Oya](https://github.com/simon-oya/USENIX22-ihop-code).
