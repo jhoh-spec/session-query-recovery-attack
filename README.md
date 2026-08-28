@@ -348,17 +348,6 @@ The evaluation scripts report the query recovery performance of the evaluated at
 
 Because the experiments involve keyword sampling and other randomized components, individual runs may differ slightly from the exact values reported in the paper. However, the overall trends should remain consistent with the paper.
 
-In particular, the experiments are intended to reproduce the following main observations:
-
-1. **Other-user auxiliary logs (Fig. 3):** THRESHOLD and DENSITY maintain substantially higher recovery accuracy than MAPLE and IHOP when the auxiliary query log comes from another user.
-
-2. **Outdated auxiliary logs (Fig. 4):** Session-based recovery remains effective when the auxiliary and victim logs are chronologically separated.
-
-3. **Large keyword universes (Fig. 5/6):** The proposed methods remain effective as the keyword universe increases to |W| ∈ {500, 1000, 2000}, while the computational cost of the Markov-based baselines increases substantially.
-
-4. **Session co-occurrence analysis (Table 3):** Session co-occurrence provides a more stable relational signal under non-exact auxiliary query logs than exact transition-based information.
-
-5. **Parameter sensitivity (Appendix B):** The appendix experiments evaluate the effects of the session threshold, DBSCAN `min_samples`, β, and RefSpeed.
 
 ---
 
@@ -417,4 +406,3 @@ This artifact is built on the [LEAKER](https://github.com/encryptogroup/LEAKER) 
 
 The `MarkovDecoding` and `MarkovIHOP` baselines build on the IHOP implementation by [Simon Oya](https://github.com/simon-oya/USENIX22-ihop-code).
 
-We thank the authors of these projects for making their implementations publicly available.
