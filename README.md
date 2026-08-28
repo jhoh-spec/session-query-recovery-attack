@@ -243,9 +243,9 @@ It corresponds to the effectiveness analysis in §5.2.
 
 ## Parameter Sensitivity Experiments
 
-The following scripts reproduce the parameter analyses reported in Appendix B.
+The following scripts reproduce the parameter analyses
 
-### Appendix B.1 — Session Threshold δ
+### Session Threshold δ
 
 ```bash
 python eval_parameter_session_threshold.py
@@ -257,7 +257,7 @@ Evaluated values:
 δ ∈ {10, 20, 30, 60} minutes
 ```
 
-### Appendix B.2 — DBSCAN `min_samples`
+###  DBSCAN `min_samples`
 
 ```bash
 python eval_parameter_min_samples.py
@@ -269,7 +269,7 @@ Evaluated values:
 min_samples ∈ {2, 3, 5, 10}
 ```
 
-### Appendix B.3 — β
+###  β
 
 ```bash
 python eval_parameter_beta.py
@@ -281,7 +281,7 @@ Evaluated values:
 β ∈ {0.2, 0.4, 0.6, 0.8, 1.0}
 ```
 
-### Appendix B.4 — RefSpeed
+###  RefSpeed
 
 ```bash
 python eval_parameter_refspeed.py
