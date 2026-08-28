@@ -106,7 +106,7 @@ python eval_large_keyword.py --n_kw 2000
 |--------|-----------|-------------|
 | **THRESHOLD** | `TimeGapSegmenter(δ)` | Splits queries into sessions by time gap |
 | **DENSITY** | `DBSCANSegmenter(eps, m)` | Density-based session segmentation |
-| **MAPLE** | `MarkovDecoding` | Frequency + Markov HMM baseline [[MAPLE'23]](https://doi.org/10.1109/SP46215.2023.10179407) |
+| **MAPLE** | `MarkovDecoding` | Frequency + Markov HMM baseline [[MAPLE'23]](https://doi.org/10.56553/popets-2024-0025) |
 | **IHOP** | `MarkovIHOP` | Hungarian-algorithm Markov baseline [[OK22]](https://doi.org/10.48550/arXiv.2110.04180) |
 
 ---
