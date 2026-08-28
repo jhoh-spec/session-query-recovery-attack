@@ -166,7 +166,7 @@ artifact/
 │   ├── TAIR/
 │   └── Wikidata SPARQL Logs/
 ├── data/                  ← created automatically at runtime
-│   ├── whoosh/            ← Whoosh indexes
+│   ├── whoosh/            
 │   ├── pickle/            ← cached query logs
 │   └── cache/
 └── requirements.txt
