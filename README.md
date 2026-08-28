@@ -148,7 +148,7 @@ All paper experiments use `dedup=False` and `batch_size=5`.
 artifact/
 ├── leaker/
 │   ├── attack/
-│   │   ├── session_recovery.py      ← MAPLE attack (this paper)
+│   │   ├── session_recovery.py      ← session-based attack (this paper)
 │   │   └── markov/                  ← MarkovDecoding & MarkovIHOP baselines
 │   └── whoosh_interface.py
 ├── evaluation/
